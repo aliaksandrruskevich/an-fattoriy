@@ -1,6 +1,6 @@
 /* Стили для секции команды */
 .team-section {
-    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
+    background: var(--bg-color);
     color: #e0e0e0;
     padding: 100px 0;
     position: relative;
@@ -166,16 +166,16 @@
 
 /* Модальное окно сотрудника */
 .team-modal .modal-content {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #ffffff;
+    border: 1px solid #ffc107;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 60px rgba(255, 193, 7, 0.3);
 }
 
 .team-modal-header {
-    background: linear-gradient(135deg, #f707ff, #ff9800);
-    color: #000;
+    background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+    color: #ffffff;
     padding: 2rem;
     text-align: center;
     position: relative;

@@ -24,7 +24,8 @@
 <section class="section black-section" id="tariffs">
   <div class="container">
     <!-- Тарифы по стоимости -->
-    <div class="tariff-section" data-aos="fade-up">
+    <div class="tariff-section" data-aos="fade-up" style="background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(42, 42, 42, 0.9) 100%); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; position: relative; border: 1px solid rgba(255, 255, 255, 0.1); padding: 2rem;">
+      <div class="tariff-section-before" style="content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(247, 7, 255, 0.1), transparent); transition: left 0.5s;"></div>
       <h2 class="text-center mb-4">Тарифы (ставки) на риэлторские услуги по стоимости объекта</h2>
       <div class="table-responsive">
         <table class="table table-striped table-hover table-bordered tariff-table">
@@ -91,53 +92,56 @@
 <!-- Калькулятор стоимости услуг -->
 <section class="section black-section" id="calculator">
   <div class="container">
-    <h2 class="text-center mb-5" data-aos="fade-up">Калькулятор <span style="color: white;">стоимости</span> услуг</h2>
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card" data-aos="zoom-in">
-          <div class="card-body">
-            <form id="calculatorForm" aria-label="Калькулятор стоимости услуг">
-              <div class="mb-3">
-                <label for="propertyPrice" class="form-label">Стоимость объекта недвижимости (BYN)</label>
-                <input type="number" class="form-control" id="propertyPrice" placeholder="Введите стоимость" required aria-required="true" aria-describedby="priceHelp" min="0" step="any">
-                <div id="priceHelp" class="form-text">Введите стоимость объекта недвижимости в белорусских рублях.</div>
+    <div class="calculator-wrapper" style="background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(42, 42, 42, 0.9) 100%); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; position: relative; border: 1px solid rgba(255, 255, 255, 0.1); padding: 2rem;">
+      <div class="calculator-wrapper-before" style="content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(247, 7, 255, 0.1), transparent); transition: left 0.5s;"></div>
+      <h2 class="text-center mb-5" data-aos="fade-up">Калькулятор <span style="color: white;">стоимости</span> услуг</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card" data-aos="zoom-in">
+            <div class="card-body">
+              <form id="calculatorForm" aria-label="Калькулятор стоимости услуг">
+                <div class="mb-3">
+                  <label for="propertyPrice" class="form-label">Стоимость объекта недвижимости (BYN)</label>
+                  <input type="number" class="form-control" id="propertyPrice" placeholder="Введите стоимость" required aria-required="true" aria-describedby="priceHelp" min="0" step="any">
+                  <div id="priceHelp" class="form-text">Введите стоимость объекта недвижимости в белорусских рублях.</div>
+                </div>
+                <div class="mb-3">
+                  <label for="serviceType" class="form-label">Тип услуги</label>
+                  <select class="form-select" id="serviceType" aria-required="true" aria-describedby="serviceHelp">
+                    <option value="sale">Продажа недвижимости</option>
+                    <option value="purchase">Подбор варианта</option>
+                    <option value="consultation">Консультация</option>
+                    <option value="info">Представление информации</option>
+                    <option value="agreement">Согласование условий</option>
+                    <option value="document_prep">Подготовка документов</option>
+                    <option value="registration">Регистрация</option>
+                  </select>
+                  <div id="serviceHelp" class="form-text">Выберите тип услуги для расчёта стоимости.</div>
+                </div>
+                <button type="button" class="btn btn-primary w-100" onclick="calculateCost()" aria-label="Рассчитать стоимость услуг">Рассчитать стоимость</button>
+              </form>
+              <div id="calculationResult" class="mt-4 text-center" style="display: none;">
+                <h4>Примерная стоимость услуг:</h4>
+                <div class="result-amount" id="resultAmount"></div>
+                <p class="text-muted mt-2" id="resultDetails"></p>
               </div>
-              <div class="mb-3">
-                <label for="serviceType" class="form-label">Тип услуги</label>
-                <select class="form-select" id="serviceType" aria-required="true" aria-describedby="serviceHelp">
-                  <option value="sale">Продажа недвижимости</option>
-                  <option value="purchase">Подбор варианта</option>
-                  <option value="consultation">Консультация</option>
-                  <option value="info">Представление информации</option>
-                  <option value="agreement">Согласование условий</option>
-                  <option value="document_prep">Подготовка документов</option>
-                  <option value="registration">Регистрация</option>
-                </select>
-                <div id="serviceHelp" class="form-text">Выберите тип услуги для расчёта стоимости.</div>
-              </div>
-              <button type="button" class="btn btn-primary w-100" onclick="calculateCost()" aria-label="Рассчитать стоимость услуг">Рассчитать стоимость</button>
-            </form>
-            <div id="calculationResult" class="mt-4 text-center" style="display: none;">
-              <h4>Примерная стоимость услуг:</h4>
-              <div class="result-amount" id="resultAmount"></div>
-              <p class="text-muted mt-2" id="resultDetails"></p>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Ссылки на модальные окна -->
-    <div class="container mt-4 mb-5 text-center">
-      <a href="#" id="showResolutionModal" style="text-decoration: underline; cursor: pointer; font-weight: bold; color: white;">
-        ПОСТАНОВЛЕНИЕ СОВЕТА МИНИСТРОВ РЕСПУБЛИКИ БЕЛАРУСЬ №386 от 14 марта 2008 г.
-      </a>
-    </div>
+      <!-- Ссылки на модальные окна -->
+      <div class="container mt-4 mb-5 text-center">
+        <a href="#" id="showResolutionModal" style="text-decoration: underline; cursor: pointer; font-weight: bold; color: white;">
+          ПОСТАНОВЛЕНИЕ СОВЕТА МИНИСТРОВ РЕСПУБЛИКИ БЕЛАРУСЬ №386 от 14 марта 2008 г.
+        </a>
+      </div>
 
-    <div class="container mt-4 mb-5 text-center">
-      <a href="#" id="showJusticeModal" style="text-decoration: underline; cursor: pointer; font-weight: bold; color: white;">
-        ПОСТАНОВЛЕНИЕ МИНИСТЕРСТВА ЮСТИЦИИ РЕСПУБЛИКИ БЕЛАРУСЬ от 01,06,2009 №42
-      </a>
+      <div class="container mt-4 mb-5 text-center">
+        <a href="#" id="showJusticeModal" style="text-decoration: underline; cursor: pointer; font-weight: bold; color: white;">
+          ПОСТАНОВЛЕНИЕ МИНИСТЕРСТВА ЮСТИЦИИ РЕСПУБЛИКИ БЕЛАРУСЬ от 01,06,2009 №42
+        </a>
+      </div>
     </div>
   </div> <!-- Закрытие container -->
 </section> <!-- Закрытие section#calculator -->
@@ -153,16 +157,36 @@
   <!-- содержимое модального окна -->
 </div>
 
+<style>
+.tariff-section:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(247, 7, 255, 0.2);
+  border-color: rgba(247, 7, 255, 0.3);
+}
+.calculator-wrapper:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(247, 7, 255, 0.2);
+  border-color: rgba(247, 7, 255, 0.3);
+}
+</style>
+
 <div id="footer-placeholder"></div>
 
 <!-- Скрипты -->
-<script src="/js/load-components.js" defer></script>
-<script src="/js/common.js" defer></script>
-<script src="/js/forms.js" defer></script>
-<script src="/js/toast.js" defer></script>
-<script src="/js/tariffs.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
+<!-- Загрузчик header -->
+<script src="/js/header-loader.js" defer></script>
+<!-- Компонентный загрузчик -->
+<script src="/js/load-components.js" defer></script>
+<!-- Common JavaScript -->
+<script src="/js/common.js" defer></script>
+<!-- Forms JavaScript -->
+<script src="/js/forms.js" defer></script>
+<!-- Toast JavaScript -->
+<script src="/js/toast.js" defer></script>
+<!-- Page-specific JavaScript -->
+<script src="/js/tariffs.js" defer></script>
 
 <script>
 // Инициализация AOS после загрузки страницы

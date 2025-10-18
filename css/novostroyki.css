@@ -195,22 +195,22 @@ body {
 
 /* Модальное окно контактов */
 .modal-content {
-  background: #1a1a1a;
-  color: #e0e0e0;
+  background: #ffffff;
+  color: #000000;
   border-radius: 15px;
   border: none;
 }
 
 .modal-header {
-  background: linear-gradient(135deg, #f707ff, #ff9800);
-  color: white;
+  background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+  color: #ffffff;
   border-radius: 15px 15px 0 0;
   border: none;
 }
 
 .modal-body {
-  background: #1a1a1a;
-  color: #e0e0e0;
+  background: #ffffff;
+  color: #000000;
 }
 
 .contact-form .form-control {

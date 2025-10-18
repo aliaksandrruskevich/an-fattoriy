@@ -390,16 +390,15 @@
 
 /* Enhanced Modal */
 .modern-modal .modal-content {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
+  background: #ffffff;
+  border: 1px solid #ffc107;
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow-strong);
+  box-shadow: 0 20px 60px rgba(255, 193, 7, 0.3);
 }
 
 .modern-modal .modal-header {
-  background: var(--gradient-primary);
-  color: white;
+  background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+  color: #ffffff;
   border: none;
   border-radius: var(--border-radius) var(--border-radius) 0 0;
   padding: 1.5rem;

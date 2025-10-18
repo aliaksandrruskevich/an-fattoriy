@@ -166,8 +166,36 @@ function parseProperties(xmlData) {
     // Operation type
     const operation = terms === 'ч' ? 'продажа' : 'аренда';
 
+    // Infer and clean up type field
+    let inferredType = record.object_type_expanded || '';
+    if (inferredType.toLowerCase().includes('обьект') || inferredType === '' || !inferredType.trim()) {
+      // Infer type based on available data
+      if (record.storey && record.storeys) {
+        inferredType = 'квартира';
+      } else if (record.house_type_expanded) {
+        const houseType = record.house_type_expanded.toLowerCase();
+        if (houseType.includes('коттедж') || houseType.includes('дом') || houseType.includes('дача')) {
+          inferredType = 'дом';
+        } else {
+          inferredType = 'дом'; // Default to house
+        }
+      } else if (record.description && record.description.toLowerCase().includes('участок')) {
+        inferredType = 'участок';
+      } else if (record.description && (record.description.toLowerCase().includes('магазин') || record.description.toLowerCase().includes('офис'))) {
+        inferredType = 'коммерческая недвижимость';
+      } else {
+        inferredType = 'дом'; // Default fallback
+      }
+    }
+
     // Generate user-friendly title
-    const userFriendlyTitle = generatePropertyTitle(record.object_type_expanded, location);
+    const userFriendlyTitle = generatePropertyTitle(inferredType, location);
+
+    // Clean up type field - remove numbers and special characters
+    let cleanType = inferredType;
+    cleanType = cleanType.replace(/^\d+\s*/, ''); // Remove leading numbers
+    cleanType = cleanType.replace(/[#\d]+$/, ''); // Remove trailing numbers and #
+    cleanType = cleanType.trim();
 
     // Create property object for DB
     const property = {
@@ -176,7 +204,7 @@ function parseProperties(xmlData) {
       location: location,
       price: price,
       currency: record.price_currency_expanded || 'USD',
-      type: record.object_type_expanded || 'Не указан',
+      type: cleanType,
       operation: operation,
       description: description,
       features: features,

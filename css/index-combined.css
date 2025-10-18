@@ -38,7 +38,7 @@ header h1 {
   padding: var(--section-padding);
   position: relative;
   overflow: hidden;
-  background: #000;
+  background: var(--bg-color);
   color: #e0e0e0;
 }
 
@@ -74,7 +74,7 @@ header h1 {
 }
 
 .black-section {
-  background: #111;
+  background: var(--bg-color);
   color: #fff;
 }
 
@@ -263,17 +263,21 @@ header h1 {
 .test-drive-modal .modal-content {
   border-radius: 15px;
   overflow: hidden;
+  background: #ffffff;
+  color: #000000;
 }
 
 .test-drive-header {
-  background: linear-gradient(135deg, #f860fd 0%, #6d6b69 100%);
-  color: white;
+  background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+  color: #ffffff;
   text-align: center;
   padding: 20px;
 }
 
 .test-drive-body {
   padding: 30px;
+  background: #ffffff;
+  color: #000000;
 }
 
 .benefit-item {
@@ -285,13 +289,13 @@ header h1 {
 .benefit-icon {
   width: 40px;
   height: 40px;
-  background: #9123a0;
+  background: #ffc107;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 15px;
-  color: white;
+  color: #000000;
 }
 
 

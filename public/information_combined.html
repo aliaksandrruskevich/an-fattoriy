@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -31,8 +30,7 @@
 
 
     <!-- Текстовый блок -->
-    <div class="tariff-section" data-aos="fade-up" style="background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(42, 42, 42, 0.9) 100%); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; position: relative; border: 1px solid rgba(255, 255, 255, 0.1); padding: 2rem;">
-      <div class="tariff-section-before" style="content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(247, 7, 255, 0.1), transparent); transition: left 0.5s;"></div>
+    <div class="tariff-section" data-aos="fade-up">
       <h2 class="text-center mb-4">Информация</h2>
       <p>
         Агентство недвижимости "Фаттория" — ваш надежный партнер в мире загородной жизни. Мы предоставляем полный спектр услуг по продаже, покупке и аренде недвижимости, сопровождая клиентов на каждом этапе сделки с гарантией юридической безопасности и максимальной выгоды.
@@ -147,81 +145,6 @@
     </div>
   </div>
 </section>
-
-<style>
-.awards-section .award-item {
-  background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(42, 42, 42, 0.9) 100%);
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  cursor: pointer;
-  position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 2rem;
-  text-align: center;
-  height: 100%;
-}
-
-.awards-section .award-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(247, 7, 255, 0.1), transparent);
-  transition: left 0.5s;
-}
-
-.awards-section .award-item:hover::before {
-  left: 100%;
-}
-
-.awards-section .award-item:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(247, 7, 255, 0.2);
-  border-color: rgba(247, 7, 255, 0.3);
-}
-
-.awards-section .award-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #f707ff, #ff9800);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1rem;
-  font-size: 2rem;
-  color: #000;
-  transition: all 0.3s ease;
-}
-
-.awards-section .award-item:hover .award-icon {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(247, 7, 255, 0.4);
-}
-
-.awards-section .award-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: #ffffff;
-}
-
-.awards-section .award-item p {
-  color: #b0b0b0;
-  font-size: 0.95rem;
-  line-height: 1.4;
-}
-
-.tariff-section:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(247, 7, 255, 0.2);
-  border-color: rgba(247, 7, 255, 0.3);
-}
-</style>
 
 <!-- Секция с лицензией -->
 <section class="license-section">
@@ -339,99 +262,6 @@
     </div>
   </div>
 </section>
-
-<style>
-.legal-docs .doc-card {
-  background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(42, 42, 42, 0.9) 100%);
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  cursor: pointer;
-  position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 2rem;
-  text-align: center;
-  height: 100%;
-}
-
-.legal-docs .doc-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(247, 7, 255, 0.1), transparent);
-  transition: left 0.5s;
-}
-
-.legal-docs .doc-card:hover::before {
-  left: 100%;
-}
-
-.legal-docs .doc-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(247, 7, 255, 0.2);
-  border-color: rgba(247, 7, 255, 0.3);
-}
-
-.legal-docs .doc-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #f707ff, #ff9800);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1rem;
-  font-size: 2rem;
-  color: #000;
-  transition: all 0.3s ease;
-}
-
-.legal-docs .doc-card:hover .doc-icon {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(247, 7, 255, 0.4);
-}
-
-.legal-docs .doc-card h5 {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: #ffffff;
-}
-
-.legal-docs .doc-card p {
-  color: #b0b0b0;
-  font-size: 0.95rem;
-  line-height: 1.4;
-  margin-bottom: 1rem;
-}
-
-.legal-docs .doc-link {
-  background: linear-gradient(135deg, #f707ff, #ff9800);
-  border: none;
-  color: #fff;
-  padding: 0.75rem 1.5rem;
-  border-radius: 25px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-size: 0.9rem;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.legal-docs .doc-link:hover {
-  background: linear-gradient(135deg, #ff9800, #f707ff);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(247, 7, 255, 0.4);
-  color: #fff;
-  text-decoration: none;
-}
-</style>
 
 
 <div id="footer-placeholder"></div>

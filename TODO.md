@@ -1,19 +1,31 @@
-# Property Management System Implementation
+# TODO: Применение рамок к разделам как в "Информация" и "Сотрудники"
 
-## Completed
-- [x] Analyze existing code and plan implementation
-- [x] Install sqlite3 dependency
-- [x] Set up database schema and module
-- [x] Modify API to store properties in DB
-- [x] Implement sync logic (add/update/archive)
-- [x] Add periodic cron job for fetching
-- [x] Update server routing for detail pages
-- [x] Integrate Yandex Maps on index.html
-- [x] Enhance list page with filters and sorting
-- [x] Create detail page template
-- [x] Test DB storage and sync
+## Задачи
 
-## In Progress
-- [ ] Test map display
-- [ ] Test filters/sorting
-- [ ] Test detail pages
+### 1. Обновление "О компании" (о компании.html)
+- [x] Добавить рамки к секции "Наши преимущества" (advantages-section)
+- [x] Добавить рамки к секции "Наша статистика" (stats)
+- [x] Добавить рамки к секции "Отзывы клиентов" (reviews)
+
+### 2. Обновление "Тарифная сетка" (тарифная сетка.html)
+- [x] Добавить рамки к секции тарифов (tariff-section)
+- [x] Добавить рамки к секции калькулятора (calculator)
+
+### 3. Обновление главной страницы (index.html)
+- [x] Добавить рамки к секции "Услуги агентства" (services-agency)
+- [x] Добавить рамки к секции "Отзывы клиентов" (reviews)
+
+## Стиль рамок
+Использовать стиль как в "информация.html":
+- Фон: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(42, 42, 42, 0.9) 100%)
+- border-radius: 20px
+- box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3)
+- border: 1px solid rgba(255, 255, 255, 0.1)
+- padding: 2rem
+- transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+- hover эффекты: translateY(-10px), scale(1.02), box-shadow увеличение
+
+## Следующие шаги
+1. Обновить каждый файл по очереди
+2. Протестировать отображение рамок
+3. Убедиться в адаптивности для мобильных устройств
