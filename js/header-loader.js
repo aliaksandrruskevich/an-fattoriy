@@ -17,6 +17,9 @@ function loadHeader() {
                     AOS.init({ duration: 1000, once: true });
                 }
 
+                // Load router after header is loaded
+                loadRouter();
+
                 console.log('Header успешно загружен');
             } else {
                 console.error('Ошибка загрузки header:', xhr.status, xhr.statusText);
@@ -27,6 +30,21 @@ function loadHeader() {
     // Загружаем header из файла
     xhr.open('GET', 'includes/header.html', true);
     xhr.send();
+}
+
+/**
+ * Load the client-side router
+ */
+function loadRouter() {
+    const script = document.createElement('script');
+    script.src = 'js/router.js';
+    script.onload = function() {
+        console.log('Router loaded successfully');
+    };
+    script.onerror = function() {
+        console.error('Failed to load router');
+    };
+    document.head.appendChild(script);
 }
 
 /**
@@ -48,6 +66,9 @@ function loadHeaderFetch() {
             if (typeof AOS !== 'undefined') {
                 AOS.init({ duration: 1000, once: true });
             }
+
+            // Load router after header is loaded
+            loadRouter();
 
             console.log('Header успешно загружен через fetch');
         })

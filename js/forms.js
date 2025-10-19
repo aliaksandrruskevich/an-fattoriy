@@ -140,12 +140,14 @@ function handleFormSubmission(e) {
   if (form.budget && form.budget.value) formData.append('budget', form.budget.value);
   if (form.propertyType && form.propertyType.value) formData.append('propertyType', form.propertyType.value);
   if (form.distance && form.distance.value) formData.append('distance', form.distance.value);
+  if (form.message && form.message.value) formData.append('message', form.message.value.trim());
 
   let formType = 'Обратная связь';
   if (form.id === 'testDriveForm') formType = 'Тест-драйв услуг';
   else if (form.id === 'trustCallbackForm') formType = 'Обратный звонок (Почему доверяют)';
   else if (form.id === 'contactForm') formType = 'Заявка на коммерческую недвижимость';
   else if (form.id === 'countrysideForm') formType = 'Заявка на загородную недвижимость';
+  else if (form.id === 'projectContactForm') formType = 'Заявка на новостройку';
   else if (form.classList.contains('contact-form')) formType = 'Консультация по новостройке';
 
   formData.append('type', formType);
@@ -183,7 +185,7 @@ function handleFormSubmission(e) {
 
 document.addEventListener('submit', function(e) {
   const form = e.target;
-  const formIds = ['feedbackFormTop', 'feedbackFormBottom', 'testDriveForm', 'trustCallbackForm', 'countrysideForm', 'calculatorForm', 'mortgageForm', 'qualityForm', 'filterForm', 'newsletterForm', 'contactForm', 'sellerForm', 'buyerForm', 'propertyInterestForm'];
+  const formIds = ['feedbackFormTop', 'feedbackFormBottom', 'testDriveForm', 'trustCallbackForm', 'countrysideForm', 'calculatorForm', 'mortgageForm', 'qualityForm', 'filterForm', 'newsletterForm', 'contactForm', 'sellerForm', 'buyerForm', 'propertyInterestForm', 'projectContactForm'];
   if (formIds.some(id => form.id === id) || form.classList.contains('contact-form')) {
     e.preventDefault();
     handleFormSubmission(e);

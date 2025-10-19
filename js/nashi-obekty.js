@@ -29,6 +29,15 @@ document.addEventListener('DOMContentLoaded', function() {
     applyFiltersBtn.addEventListener('click', applyFilters);
   }
 
+  // Add reset filters functionality
+  const resetFiltersBtn = document.createElement('button');
+  resetFiltersBtn.className = 'btn btn-outline-secondary ms-2';
+  resetFiltersBtn.textContent = 'Сбросить';
+  resetFiltersBtn.addEventListener('click', resetFilters);
+  if (applyFiltersBtn && applyFiltersBtn.parentNode) {
+    applyFiltersBtn.parentNode.appendChild(resetFiltersBtn);
+  }
+
   if (prevBtn) {
     prevBtn.addEventListener('click', () => navigatePage(currentPage - 1));
   }
@@ -47,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Intercept property link clicks for SPA navigation
   document.addEventListener('click', function(e) {
     const target = e.target.closest('.btn');
-    if (target && target.textContent.trim() === 'Подробнее') {
+    if (target && target.textContent.trim() === '���������') {
       e.preventDefault();
       const href = target.getAttribute('href');
       if (href && href.startsWith('/object/')) {
@@ -105,10 +114,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     showLoading();
 
-    // Load all 500 properties
-    const url = `/api/properties.php?limit=500&offset=0`;
-
-    fetch(url)
+    // Load properties from static JSON file first
+    fetch('/data/properties.json')
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -123,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateNavigation();
       })
       .catch(error => {
-        console.error('Error loading properties:', error);
+        console.error('Error loading properties from static file:', error);
         showError('Не удалось загрузить объекты. Попробуйте обновить страницу.');
       });
   }
@@ -274,6 +281,9 @@ document.addEventListener('DOMContentLoaded', function() {
     img.src = property.photos && property.photos.length > 0 ? property.photos[0] : 'https://via.placeholder.com/300x200?text=Нет+фото';
     img.alt = property.title;
     img.loading = 'lazy';
+    img.onerror = function() {
+      this.src = 'https://via.placeholder.com/300x200?text=Фото+недоступно';
+    };
 
     const cardBody = document.createElement('div');
     cardBody.className = 'card-body d-flex flex-column';
@@ -297,7 +307,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const link = document.createElement('a');
     link.href = `/object/${property.unid}`;
     link.className = 'btn btn-warning btn-sm mt-auto';
-    link.textContent = 'Подробнее';
+    link.textContent = '���������';
 
     cardBody.appendChild(title);
     cardBody.appendChild(location);
@@ -318,6 +328,12 @@ document.addEventListener('DOMContentLoaded', function() {
     return new Intl.NumberFormat('ru-RU').format(price) + ' ' + (symbols[currency] || currency);
   }
 
+  function parseRoomsFromTitle(title) {
+    if (!title) return 'Комнаты не указаны';
+    const match = title.match(/(\d+)-комнатная/);
+    return match ? `${match[1]} комнат` : 'Комнаты не указаны';
+  }
+
   // SPA Navigation Functions
   function initializePage() {
     const path = window.location.pathname;
@@ -325,14 +341,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const unidFromQuery = urlParams.get('unid');
 
     if (unidFromQuery) {
-      loadAllProperties().then(() => {
+      loadAllProperties();
+      // Wait for properties to load, then show detail
+      setTimeout(() => {
         showPropertyDetail(unidFromQuery);
-      });
+      }, 1000);
     } else if (path.startsWith('/object/')) {
       const unid = path.split('/object/')[1];
-      loadAllProperties().then(() => {
+      loadAllProperties();
+      // Wait for properties to load, then show detail
+      setTimeout(() => {
         showPropertyDetail(unid);
-      });
+      }, 1000);
     } else {
       loadAllProperties();
     }
@@ -503,6 +523,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
       map.geoObjects.add(placemark);
     }
+  }
+
+  function resetFilters() {
+    // Reset all filter inputs
+    const typeSelect = document.querySelector('.filter-group select');
+    const districtSelect = document.querySelectorAll('.filter-group select')[1];
+    const roomsSelect = document.querySelectorAll('.filter-group select')[2];
+    const priceRange = document.getElementById('priceRange');
+    const areaMinInput = document.querySelector('.filter-group input[placeholder="от"]');
+    const areaMaxInput = document.querySelector('.filter-group input[placeholder="до"]');
+
+    if (typeSelect) typeSelect.value = 'Все типы';
+    if (districtSelect) districtSelect.value = 'Все районы';
+    if (roomsSelect) roomsSelect.value = 'Любое';
+    if (priceRange) priceRange.value = 0;
+    if (areaMinInput) areaMinInput.value = '';
+    if (areaMaxInput) areaMaxInput.value = '';
+
+    // Reset filtered properties to all properties
+    filteredProperties = [...allProperties];
+    currentPage = 1;
+    displayCurrentPage();
+    updateNavigation();
   }
 
   // Contact form handling

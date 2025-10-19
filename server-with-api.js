@@ -112,7 +112,7 @@ const server = http.createServer((req, res) => {
   const detailMatch = pathname.match(/^\/object\/(.+)$/);
   if (detailMatch) {
     // Serve the properties list page for SPA navigation
-    filePath = path.join(__dirname, 'public', 'наши обьекты.html');
+    filePath = path.join(__dirname, 'public', 'properties.html');
   } else {
     // Check if it's an HTML file
     if (path.extname(pathname) === '.html') {

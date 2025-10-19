@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         headerPlaceholder.innerHTML = html;
         // Инициализируем обработчики форм после загрузки хедера
         initializeFormHandlers();
+
       }
     })
     .catch(error => {
@@ -67,6 +68,12 @@ function initializeFormHandlers() {
   const feedbackFormBottom = document.getElementById('feedbackFormBottom');
   if (feedbackFormBottom) {
     feedbackFormBottom.addEventListener('submit', handleFormSubmission);
+  }
+
+  // Инициализируем форму обратной связи на странице объекта
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', handleFormSubmission);
   }
 }
 
@@ -145,7 +152,7 @@ async function submitFormData(data) {
       formData.append(key, data[key]);
     }
 
-    const response = await fetch(window.scriptURL || "https://script.google.com/macros/s/AKfycbx2cgkl7fZ3SU1vY7rB6m_NpH9BZultSe0e65_7rkLJN_hSPeYRqXau3HNL8nFRZ-wFIw/exec", {
+    const response = await fetch(window.scriptURL || "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
       method: 'POST',
       body: formData
     });
@@ -276,6 +283,24 @@ function initializeModalHandlers() {
             showTermsModal();
         });
     }
+}
+
+// Функция для инициализации обработчиков навигации
+function initializeNavigationHandlers() {
+  // Добавляем обработчики для всех ссылок навигации
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href]');
+    if (link) {
+      const href = link.getAttribute('href');
+      // Проверяем, является ли ссылка навигационной (не внешней, не якорной)
+      if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('tel:') && !href.startsWith('mailto:')) {
+        // Не предотвращаем стандартное поведение для нормальной навигации
+        // e.preventDefault();
+        // Переходим на страницу
+        // window.location.href = href;
+      }
+    }
+  });
 }
 
 // Глобальные функции для модальных окон политики конфиденциальности и пользовательского соглашения

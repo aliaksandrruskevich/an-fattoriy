@@ -83,7 +83,7 @@
           <div class="category-content">
             <h4>Новостройки</h4>
             <p>Современные жилые комплексы с отделкой</p>
-            <a href="новостройки.html" class="btn btn-outline-light btn-sm mt-2">Смотреть</a>
+            <a href="new-buildings.html" class="btn btn-outline-light btn-sm mt-2">Смотреть</a>
           </div>
         </div>
       </div>
@@ -93,7 +93,7 @@
           <div class="category-content">
             <h4>Наши объекты</h4>
             <p>Лучшие предложения от нашего агентства</p>
-            <a href="наши обьекты.html" class="btn btn-outline-light btn-sm mt-2">Смотреть</a>
+            <a href="properties.html" class="btn btn-outline-light btn-sm mt-2">Смотреть</a>
           </div>
         </div>
       </div>
@@ -143,7 +143,7 @@
       <!-- Специальные предложения будут загружены динамически -->
     </div>
     <div class="text-center mt-4">
-      <a href="наши обьекты.html" class="btn btn-outline-dark">Все предложения</a>
+      <a href="properties.html" class="btn btn-outline-dark">Все предложения</a>
     </div>
   </div>
 </section>
@@ -393,7 +393,7 @@
 
 <!-- Floating Contact Button -->
 <div class="floating-contact">
-  <a href="https://wa.me/375447025267" target="_blank" class="floating-btn whatsapp">
+                  <a href="https://wa.me/375447025267" target="_blank" rel="noopener" class="floating-btn whatsapp">
     <i class="fab fa-whatsapp"></i>
   </a>
   <a href="tel:+375447025267" class="floating-btn phone">
@@ -583,36 +583,38 @@ a:focus, button:focus, input:focus, select:focus, textarea:focus {
     });
 
     // Загружаем объекты из API
-    fetch('/api/properties.php?limit=50')
+    fetch('/api/properties')
       .then(response => response.json())
       .then(data => {
-        data.forEach((property, index) => {
-          if (property.lat && property.lng) {
-            // Используем реальные координаты из базы данных
-            var lat = property.lat;
-            var lng = property.lng;
-          } else {
-            // Генерируем случайные координаты вокруг Минска для демонстрации
-            var lat = 53.9045 + (Math.random() - 0.5) * 0.1;
-            var lng = 27.5615 + (Math.random() - 0.5) * 0.1;
-          }
+        if (Array.isArray(data)) {
+          data.forEach((property, index) => {
+            if (property.lat && property.lng) {
+              // Используем реальные координаты из базы данных
+              var lat = property.lat;
+              var lng = property.lng;
+            } else {
+              // Генерируем случайные координаты вокруг Минска для демонстрации
+              var lat = 53.9045 + (Math.random() - 0.5) * 0.1;
+              var lng = 27.5615 + (Math.random() - 0.5) * 0.1;
+            }
 
-          var placemark = new ymaps.Placemark([lat, lng], {
-            hintContent: property.title,
-            balloonContent: `
-              <div>
-                <h5>${property.title}</h5>
-                <p><strong>Цена:</strong> ${property.price} ${property.currency}</p>
-                <p><strong>Местоположение:</strong> ${property.location}</p>
-                <p><strong>Тип:</strong> ${property.type}</p>
-                <p>${property.description.substring(0, 100)}...</p>
-                <button class="btn btn-warning btn-sm" onclick="window.location.href='/object/${property.unid}'">Подробнее</button>
-              </div>
-            `
+            var placemark = new ymaps.Placemark([lat, lng], {
+              hintContent: property.title,
+              balloonContent: `
+                <div>
+                  <h5>${property.title}</h5>
+                  <p><strong>Цена:</strong> ${property.price} ${property.currency}</p>
+                  <p><strong>Местоположение:</strong> ${property.location}</p>
+                  <p><strong>Тип:</strong> ${property.type}</p>
+                  <p>${property.description.substring(0, 100)}...</p>
+                  <a href="object.html?unid=${property.unid}" class="btn btn-warning btn-sm">Подробнее</a>
+                </div>
+              `
+            });
+
+            myMap.geoObjects.add(placemark);
           });
-
-          myMap.geoObjects.add(placemark);
-        });
+        }
       })
       .catch(error => {
         console.error('Ошибка загрузки объектов:', error);
@@ -654,7 +656,7 @@ a:focus, button:focus, input:focus, select:focus, textarea:focus {
                   <p><strong>Описание:</strong> ${description}</p>
                   <div class="mt-4">
                     <a href="tel:${contactPhone}" class="btn btn-warning me-2">Заказать звонок</a>
-                    <button class="btn btn-outline-primary" onclick="window.location.href='наши обьекты.html'">Смотреть все объекты</button>
+                    <button class="btn btn-outline-primary" onclick="window.location.href='properties.html'">Смотреть все объекты</button>
                   </div>
                 </div>
               </div>
@@ -781,8 +783,8 @@ function loadSpecialOffers() {
   errorMessage.style.display = 'none';
   specialsContainer.innerHTML = '';
 
-  // Fetch properties from API (limit to 3 for specials)
-  fetch('/api/properties.php?limit=3&sort=price_desc')
+  // Fetch properties from static JSON file
+  fetch('/data/properties.json')
     .then(response => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -797,8 +799,11 @@ function loadSpecialOffers() {
         return;
       }
 
+      // Take only first 3 properties for special offers
+      const specialOffers = data.slice(0, 3);
+
       // Create special offer cards
-      data.forEach((property, index) => {
+      specialOffers.forEach((property, index) => {
         const col = document.createElement('div');
         col.className = 'col-md-4';
         col.setAttribute('data-aos', 'fade-up');
@@ -807,7 +812,7 @@ function loadSpecialOffers() {
         const card = document.createElement('div');
         card.className = 'special-card clickable-card';
         card.style.cursor = 'pointer';
-        card.onclick = () => window.open(`наши обьекты.html?unid=${property.unid}`, '_blank');
+        card.onclick = () => window.open(`properties.html?unid=${property.unid}`, '_blank');
 
         const imgContainer = document.createElement('div');
         imgContainer.className = 'position-relative';

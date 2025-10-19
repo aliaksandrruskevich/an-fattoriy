@@ -1,0 +1,207 @@
+/* Стили для страниц ЖК */
+
+/* Hero Section */
+.project-hero {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  color: white;
+  padding: 80px 0;
+}
+
+.project-hero h1 {
+  color: #ffc107;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.project-hero .lead {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  color: #e0e0e0;
+}
+
+.project-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.location {
+  color: #ffc107;
+  font-weight: 500;
+}
+
+.location i {
+  margin-right: 0.5rem;
+}
+
+/* Project Details Section */
+.project-details {
+  background: #f8f9fa;
+  padding: 80px 0;
+}
+
+.project-gallery img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.project-description h2,
+.project-features h2,
+.project-infrastructure h2 {
+  color: #333;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.project-description p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+}
+
+.feature-list li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+  color: #555;
+  font-size: 1rem;
+}
+
+.feature-list li:last-child {
+  border-bottom: none;
+}
+
+.feature-list i {
+  margin-right: 0.75rem;
+  width: 20px;
+}
+
+.infrastructure-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.infra-item {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.infra-item:hover {
+  transform: translateY(-5px);
+}
+
+.infra-item i {
+  font-size: 2.5rem;
+  color: #ffc107;
+  margin-bottom: 1rem;
+}
+
+.infra-item span {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Contact Card */
+.contact-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.contact-card h3 {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.contact-card p {
+  color: #666;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.contact-card .form-control {
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.contact-card .form-control:focus {
+  border-color: #ffc107;
+  box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+}
+
+.contact-card .btn-warning {
+  background: #ffc107;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.contact-card .btn-warning:hover {
+  background: #e0a800;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .project-hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .project-hero .lead {
+    font-size: 1.1rem;
+  }
+
+  .project-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .project-gallery .row > div {
+    margin-bottom: 1rem;
+  }
+
+  .project-gallery img {
+    height: 250px;
+  }
+
+  .project-description h2,
+  .project-features h2,
+  .project-infrastructure h2 {
+    font-size: 2rem;
+  }
+
+  .infrastructure-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-card {
+    padding: 1.5rem;
+  }
+}
